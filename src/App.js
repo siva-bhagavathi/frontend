@@ -6,16 +6,19 @@ import { useEffect, useState } from "react";
 function App() {
   const [job, setJob] = useState("");
 
-  useEffect(() => {
+  const fetchJobs = () => {
     Axios.get("https://localhost:7111/1").then((res) => {
-      //console.log(res.data);
       setJob(res.data.job);
     });
+  };
+
+  useEffect(() => {
+    fetchJobs();
   }, []);
   return (
     <div className="App">
       <p> Welcome to Alspec</p>
-      <button>Get jobs</button>
+      <button onClick={fetchJobs}>Get jobs</button>
       <p>{job}</p>
     </div>
   );
