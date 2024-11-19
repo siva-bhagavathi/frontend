@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [job, setJob] = useState("");
+
+  useEffect(() => {
+    Axios.get("https://localhost:7111/1").then((res) => {
+      //console.log(res.data);
+      setJob(res.data.job);
+    });
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p> Welcome to Alspec</p>
+      <button>Get jobs</button>
+      <p>{job}</p>
     </div>
   );
 }
